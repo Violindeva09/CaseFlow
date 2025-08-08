@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Customer Dashboard</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/style.css" rel="stylesheet">
+</head>
+<body>
+  <div class="container mt-4">
+    <!-- Header with Logout -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <h2 class="text-white fw-bold">Customer Dashboard</h2>
+      <a href="/" class="btn btn-logout">Logout</a>
+    </div>
+
+    <!-- Ticket Form -->
+    <div class="card shadow p-4 mb-4">
+      <h4 class="mb-3 text-primary">Submit a Ticket</h4>
+      <form action="/customer" method="post">
+        <div class="mb-3">
+          <input type="text" name="title" placeholder="Ticket Title" class="form-control" required>
+        </div>
+        <div class="mb-3">
+          <textarea name="description" placeholder="Describe your issue" class="form-control" rows="3" required></textarea>
+        </div>
+        <div class="mb-3">
+          <select name="urgency" class="form-select">
+            <option>Low</option>
+            <option>Medium</option>
+            <option>High</option>
+            <option>Critical</option>
+          </select>
+        </div>
+        <button type="submit" class="btn btn-success w-100">Submit Ticket</button>
+      </form>
+    </div>
+
+    <!-- Tickets Table -->
+    <div class="card shadow p-4">
+      <h4 class="mb-3 text-primary">Your Tickets</h4>
+      <table class="table table-bordered table-striped">
+        <thead class="table-dark">
+          <tr>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Urgency</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% if (tickets.length === 0) { %>
+            <tr><td colspan="4" class="text-center">No tickets yet</td></tr>
+          <% } else { %>
+            <% tickets.forEach(ticket => { %>
+              <tr>
+                <td><%= ticket.id %></td>
+                <td><%= ticket.title %></td>
+                <td>
+                  <% if (ticket.urgency === "Critical") { %>
+                    <span class="badge bg-danger"><%= ticket.urgency %></span>
+                  <% } else if (ticket.urgency === "High") { %>
+                    <span class="badge bg-warning text-dark"><%= ticket.urgency %></span>
+                  <% } else { %>
+                    <span class="badge bg-success"><%= ticket.urgency %></span>
+                  <% } %>
+                </td>
+                <td><%= ticket.status %></td>
+              </tr>
+            <% }) %>
+          <% } %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</body>
+</html>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
