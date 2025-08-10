@@ -9,8 +9,8 @@ Supervisor Dashboard: Monitor escalations with SLA alerts
 Role-based navigation with a secure logout
 Gradient background with Bootstrap cards and badges
 📸 Screenshots
-<img width="1616" height="789" alt="image" src="https://github.com/user-attachments/assets/b03f9e28-cd66-4361-ad5b-2beada8efc00" />
-<img width="1264" height="682" alt="image" src="https://github.com/user-attachments/assets/44a28816-7077-42dc-8f42-c0fe2193efb5" />
+
+
 
 🛠 Tech Stack
 Node.js + Express
