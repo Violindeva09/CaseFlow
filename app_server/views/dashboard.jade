@@ -1,0 +1,27 @@
+extends layout
+
+block content
+  h2.text-center.mb-4 Dashboard
+  .row.text-center.g-4
+    .col-md-3
+      .card.p-3
+        h5 Open Cases
+        h3 12
+    .col-md-3
+      .card.p-3
+        h5 SLA at Risk
+        h3 2
+    .col-md-3
+      .card.p-3
+        h5 Resolved Today
+        h3 7
+    .col-md-3
+      .card.p-3
+        h5 Escalated
+        h3 1
+  h4.mt-4 Recent Activities
+  ul
+    li User A created Case #123
+    li User B resolved Case #124
+    li User C escalated Case #125 to Tier 2
+    li User D updated Case #126 priority to High

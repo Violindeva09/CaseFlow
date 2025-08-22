@@ -1,0 +1,18 @@
+extends layout
+
+block content
+  h2.mb-3.text-center Case Intake Form
+  form.mx-auto(style="max-width:500px;")
+    .mb-3
+      label.form-label Subject
+      input.form-control(type="text", placeholder="Enter case subject")
+    .mb-3
+      label.form-label Priority
+      select.form-select
+        option Low
+        option Medium
+        option High
+    .mb-3
+      label.form-label Description
+      textarea.form-control(rows="4", placeholder="Describe the issue")
+    button.btn.btn-success.w-100(type="submit") Submit

@@ -1,0 +1,22 @@
+body {
+  min-height: 100vh;
+  margin: 0;
+  background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+  background-attachment: fixed;
+  color: #fff;
+}
+
+h1, h2, h3, h4, h5, h6, p, label, td, th {
+  color: #fff; /* keep text visible */
+}
+
+.card {
+  background-color: rgba(255, 255, 255, 0.1);
+  border: none;
+  border-radius: 12px;
+  color: #fff;
+}
+
+.btn {
+  border-radius: 20px;
+}

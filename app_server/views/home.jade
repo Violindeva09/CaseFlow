@@ -1,0 +1,24 @@
+extends layout
+
+block content
+  h1.text-center.mb-3 Automated Case Assignment & Escalation
+  p.lead.text-center.mb-4 A simple project demo showing the outline of the system.
+  .row.row-cols-1.row-cols-md-3.g-4
+    .col
+      .card.text-center.p-3
+        .card-body
+          h5.card-title Case Intake
+          p.card-text Form to submit support cases
+          a.btn.btn-primary(href="/intake") Go
+    .col
+      .card.text-center.p-3
+        .card-body
+          h5.card-title Dashboard
+          p.card-text Quick view of SLA and bottlenecks
+          a.btn.btn-primary(href="/dashboard") Go
+    .col
+      .card.text-center.p-3
+        .card-body
+          h5.card-title Reports
+          p.card-text Analyze case performance
+          a.btn.btn-primary(href="/reports") Go
