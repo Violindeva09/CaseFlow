@@ -16,6 +16,10 @@ app.use('/api/cases', caseRoutes);
 const PORT = process.env.PORT || 4000;
 // simple health check
 app.get('/health', (req, res) => res.json({ status: 'ok' }));
+// Friendly root route for backend homepage
+app.get('/', (req, res) => {
+  res.send('CaseFlow API is running! See /api/auth or /api/cases for endpoints.');
+});
 
 let server;
 connectDB(process.env.MONGO_URI || 'mongodb://localhost:27017/caseflow')
