@@ -37,10 +37,13 @@ import { CommonModule } from '@angular/common';
           </mat-form-field>
           <button mat-raised-button color="primary" type="submit" [disabled]="loginForm.invalid" class="w-full bg-sky-600 text-white hover:bg-sky-700">Login</button>
         </form>
-        <div class="register-actions" style="margin-top: 1rem; display:flex; gap:8px; justify-content:space-between;">
-          <button mat-stroked-button color="accent" (click)="goRegister('citizen')" class="px-3">Citizen</button>
-          <button mat-stroked-button color="accent" (click)="goRegister('agent')" class="px-3">Agent</button>
-          <button mat-stroked-button color="accent" (click)="goRegister('supervisor')" class="px-3">Supervisor</button>
+        <div class="register-actions" style="margin-top: 1rem;">
+          <p class="text-sm text-gray-600 mb-2">Don't have an account? Register as:</p>
+          <div style="display:flex; gap:8px; justify-content:space-between;">
+            <button mat-stroked-button color="accent" (click)="goRegister('citizen')" class="px-3">Citizen</button>
+            <button mat-stroked-button color="accent" (click)="goRegister('agent')" class="px-3">Agent</button>
+            <button mat-stroked-button color="accent" (click)="goRegister('supervisor')" class="px-3">Supervisor</button>
+          </div>
         </div>
       </mat-card-content>
       </mat-card>
