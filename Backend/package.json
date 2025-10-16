@@ -2,9 +2,8 @@
   "name": "caseflow-backend",
   "version": "1.0.0",
   "scripts": {
-    "dev": "nodemon server.js",
-    "start": "node server.js",
-    "seed": "node seed.js"
+  "postinstall": "cd ../Frontend && npm install && npm run build -- --configuration production",
+  "start": "node server.js"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",

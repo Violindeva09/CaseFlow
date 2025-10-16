@@ -1,6 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
+const path = require('path');
 const connectDB = require('./config/db');
 const authRoutes = require('./routes/authRoutes');
 const caseRoutes = require('./routes/caseRoutes');
@@ -10,16 +11,27 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+// API routes
 app.use('/api/auth', authRoutes);
 app.use('/api/cases', caseRoutes);
 
-const PORT = process.env.PORT || 4000;
-// simple health check
+// Health check
 app.get('/health', (req, res) => res.json({ status: 'ok' }));
-// Friendly root route for backend homepage
-app.get('/', (req, res) => {
-  res.send('CaseFlow API is running! See /api/auth or /api/cases for endpoints.');
+
+// --- Serve Angular static files (adjust name below) ---
+app.use(express.static(path.join(__dirname, '../Frontend/dist/browser')));
+
+app.get(/^\/(?!api).*/, (req, res) => {
+  res.sendFile(path.join(__dirname, '../Frontend/dist/browser/index.html'));
 });
+// -------------------------------------------------------
+
+// Friendly root route (optional, now handled by Angular)
+// app.get('/', (req, res) => {
+//   res.send('CaseFlow API is running! See /api/auth or /api/cases for endpoints.');
+// });
+
+const PORT = process.env.PORT || 4000;
 
 let server;
 connectDB(process.env.MONGO_URI || 'mongodb://localhost:27017/caseflow')
