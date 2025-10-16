@@ -19,9 +19,9 @@ app.use('/api/cases', caseRoutes);
 app.get('/health', (req, res) => res.json({ status: 'ok' }));
 
 // Serve Angular static files (folder = frontend)
-app.use(express.static(path.join(__dirname, '../Frontend/dist/frontend')));
+app.use(express.static(path.join(__dirname, '../Frontend/dist/frontend/browser')));
 app.get(/^\/(?!api).*/, (req, res) => {
-  res.sendFile(path.join(__dirname, '../Frontend/dist/frontend/index.html'));
+  res.sendFile(path.join(__dirname, '../Frontend/dist/frontend/browser/index.html'));
 });
 // -------------------------------------------------------
 
