@@ -1,0 +1,49 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap');
+
+
+:root {
+  /* Primary gradient colors */
+  --gradient-start: #113e9a; /* blue */
+  --gradient-end: #d64282;   /* light pink */
+  --card-bg: rgba(255,255,255,0.92);
+  --nav-text: #ffffff;
+  --icon-color: #ffffff;
+}
+
+body {
+  /* blue -> light pink diagonal gradient */
+  background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
+  min-height: 100vh;
+  font-family: 'Roboto', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+  margin: 0;
+  color: #0f172a; /* default body text */
+}
+
+/* small helper to center the app content */
+.app-shell { max-width: 1100px; margin: 2rem auto; padding: 1rem; }
+
+/* Improve material card look inside tailwind layout */
+.mat-card { background-color: var(--card-bg); border-radius: 0.5rem; box-shadow: 0 6px 18px rgba(15,23,42,0.06); }
+
+/* Buttons default to nicer rounded style */
+button { border-radius: 0.375rem; }
+
+/* Layout: make the container horizontal with sidebar and main content */
+.app-container { display: flex; flex-direction: row; height: 100vh; }
+
+/* Sidebar styling */
+app-sidebar { transition: width 0.3s ease; }
+app-sidebar mat-nav-list a.mat-list-item { color: #333; text-decoration: none; }
+app-sidebar mat-nav-list a.mat-list-item:hover { background-color: #e9ecef; }
+
+/* Icon tweaks */
+app-sidebar mat-icon, .mat-toolbar mat-icon { font-size: 20px; color: var(--icon-color); }
+.mat-toolbar { background: transparent !important; color: var(--nav-text) !important; box-shadow: none !important; }
+.mat-toolbar .text-xl, .mat-toolbar .text-sm { color: var(--nav-text); }
+.mat-toolbar button.mat-icon-button mat-icon { color: var(--icon-color); }
+
+/* Make main content stand out on top of the gradient */
+.main-content { padding: 1rem; }
+
+/* Ensure cards/content use readable text */
+.mat-card, .mat-card * { color: #0f172a; }
