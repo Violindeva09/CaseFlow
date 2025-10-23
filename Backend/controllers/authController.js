@@ -5,35 +5,44 @@ const JWT_SECRET = process.env.JWT_SECRET || 'devsecret';
 
 exports.register = async (req, res) => {
   try {
+    // DEBUG: Log received payload
+    console.log('Register payload:', req.body);
+
+    // Validation: Check required fields
     const { username, name, password, role, skills } = req.body;
-    if (role === 'admin') return res.status(403).json({ error: 'Cannot register as admin' });
+    if (!username || !name || !password || !role) {
+      return res.status(400).json({
+        error: 'Missing required field(s). username, name, password, and role are required.'
+      });
+    }
+    if (role === 'admin') {
+      return res.status(403).json({ error: 'Cannot register as admin' });
+    }
+
+    // Check if username already exists
+    const existingUser = await User.findOne({ username });
+    if (existingUser) {
+      return res.status(400).json({ error: 'Username already taken. Choose a different one.' });
+    }
+
+    // Hash password and create user
     const hash = await bcrypt.hash(password, 10);
-    const user = await User.create({ username, name, passwordHash: hash, role, skills });
-    res.json({ ok: true, user: { id: user._id, username: user.username, role: user.role } });
-  } catch (err) {
-    res.status(400).json({ error: err.message });
-  }
-};
+    const user = await User.create({
+      username,
+      name,
+      passwordHash: hash,
+      role,
+      skills: skills || []
+    });
 
-exports.login = async (req, res) => {
-  try {
-    const { username, password } = req.body;
-    const user = await User.findOne({ username });
-    if (!user) return res.status(401).json({ message: 'Invalid credentials' });
-    const valid = await bcrypt.compare(password, user.passwordHash);
-    if (!valid) return res.status(401).json({ message: 'Invalid credentials' });
-    const token = jwt.sign({ id: user._id, role: user.role, username: user.username }, JWT_SECRET, { expiresIn: '8h' });
-    res.json({ token, user: { id: user._id, username: user.username, role: user.role } });
+    // Success response
+    res.json({
+      ok: true,
+      user: { id: user._id, username: user.username, role: user.role }
+    });
   } catch (err) {
-    res.status(400).json({ error: err.message });
-  }
-};
-
-exports.getAgents = async (req, res) => {
-  try {
-    const agents = await User.find({ role: 'agent' }).select('_id name username workload capacity skills');
-    res.json(agents);
-  } catch (err) {
+    // Generic error handler (for JSON parsing or DB issues)
+    console.error('Registration error:', err);
     res.status(400).json({ error: err.message });
   }
 };
